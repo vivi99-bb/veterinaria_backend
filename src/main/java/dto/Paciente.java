@@ -4,16 +4,18 @@ import java.util.Date;
 
 public class Paciente {
 
-    private String id, nombre, especie, raza, id_tutor, id_usuario;
+    private String id, nombre, especie, raza;
     private Date fe_nacimiento, fe_registro;
+    private Tutor id_tutor;
+    private Usuarios id_usuario;
 
     public Paciente() {
         this.id = "";
         this.nombre = "";
         this.especie = "";
         this.raza = "";
-        this.id_tutor = "";
-        this.id_usuario = "";
+        this.id_tutor = new Tutor();
+        this.id_usuario = new Usuarios();
         this.fe_nacimiento = new Date();
         this.fe_registro = new Date();
     }
@@ -34,11 +36,11 @@ public class Paciente {
         this.raza = raza;
     }
 
-    public void setId_tutor(String id_tutor) {
+    public void setId_tutor(Tutor id_tutor) {
         this.id_tutor = id_tutor;
     }
 
-    public void setId_usuario(String id_usuario) {
+    public void setId_usuario(Usuarios id_usuario) {
         this.id_usuario = id_usuario;
     }
 
@@ -69,11 +71,11 @@ public class Paciente {
         return raza;
     }
 
-    public String getId_tutor() {
+    public Tutor getId_tutor() {
         return id_tutor;
     }
 
-    public String getId_usuario() {
+    public Usuarios getId_usuario() {
         return id_usuario;
     }
 
