@@ -1,4 +1,4 @@
-package dto;
+package veterinaria.XYZ.dto;
 
 public class Tutor {
 

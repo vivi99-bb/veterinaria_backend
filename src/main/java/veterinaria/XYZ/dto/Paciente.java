@@ -1,4 +1,4 @@
-package dto;
+package veterinaria.XYZ.dto;
 
 import java.util.Date;
 

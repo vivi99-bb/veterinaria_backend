@@ -1,4 +1,4 @@
-package mensaje;
+package veterinaria.XYZ.mensaje;
 
 public record ResponseMessage<T>(
 
@@ -13,7 +13,7 @@ public record ResponseMessage<T>(
         this.data = data;
     }
 
-        // Métodos getter
+        //methods getter
         public int getCode() {
         return code;
     }

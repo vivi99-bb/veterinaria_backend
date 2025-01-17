@@ -1,7 +1,7 @@
-package mapper;
+package veterinaria.XYZ.mapper;
 
 
-import dto.Tutor;
+import veterinaria.XYZ.dto.Tutor;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
