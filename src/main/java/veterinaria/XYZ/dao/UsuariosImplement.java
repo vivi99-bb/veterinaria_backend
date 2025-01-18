@@ -24,7 +24,7 @@ public class UsuariosImplement implements UsusariosDao{
 
 
     public void insert(Usuarios usuarios) throws DaoException{
-        String INSERT = "INSERT INTO public.usuarios(id, ds_correo, ds_contraseña, ds_nombres, nu_cedula) VALUES (?, ?, ?, ?, ?)";
+        String INSERT = "INSERT INTO usuarios(id, ds_correo, ds_contraseña, ds_nombres, nu_cedula) VALUES (?, ?, ?, ?, ?)";
         try{
             String uuid = UUID.randomUUID().toString();
             usuarios.setId(uuid);
@@ -45,7 +45,7 @@ public class UsuariosImplement implements UsusariosDao{
     }
 
     public void delete(Usuarios usuarios){
-        String DELETE ="DELETE FROM public.usuarios WHERE id=?";
+        String DELETE ="DELETE FROM usuarios WHERE id=?";
         try{
             jdbcTemplate.update(DELETE,usuarios.getId());
         }catch (Exception ex){
@@ -64,7 +64,7 @@ public class UsuariosImplement implements UsusariosDao{
     }
 
     public List<Map<String, Object>> selectAll() throws DaoException {
-        String selectAll = "SELECT id, ds_correo, ds_contraseña, ds_nombres, nu_cedula FROM public.usuarios";
+        String selectAll = "SELECT id, ds_correo, ds_contraseña, ds_nombres, nu_cedula FROM usuarios";
         try{
             return jdbcTemplate.queryForList(selectAll);
         }catch (Exception ex){
