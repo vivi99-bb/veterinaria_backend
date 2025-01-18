@@ -6,7 +6,7 @@ import veterinaria.XYZ.exception.DaoException;
 import java.util.List;
 import java.util.Map;
 
-public interface UsusariosDao {
+public interface UsuariosDao {
 
     public void insert(Usuarios usuarios) throws DaoException;
     public void update(Usuarios usuarios) throws DaoException;

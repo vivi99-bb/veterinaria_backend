@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Repository
-public class UsuariosImplement implements UsusariosDao{
+public class UsuariosImplement implements UsuariosDao {
 
     private final JdbcTemplate jdbcTemplate;
 
