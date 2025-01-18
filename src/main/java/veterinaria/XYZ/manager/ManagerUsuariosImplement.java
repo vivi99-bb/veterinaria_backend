@@ -15,7 +15,7 @@ public class ManagerUsuariosImplement implements ManagerUsuarios {
 
     private UsuariosDao usuariosDao;
 
-    public ManagerUsuariosImplement(UsuariosDao usuariosDao, ManagerUsuarios managerUsuarios) {
+    public ManagerUsuariosImplement(UsuariosDao usuariosDao) {
         this.usuariosDao = usuariosDao;
     }
 
