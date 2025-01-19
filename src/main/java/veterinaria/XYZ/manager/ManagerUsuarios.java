@@ -9,7 +9,7 @@ import java.util.Map;
 public interface ManagerUsuarios {
 
     public void crear(Usuarios usuarios) throws ManageException;
-    public Usuarios selectByid(Usuarios usuarios) throws  ManageException;
+    public Usuarios selectById(Usuarios usuarios) throws  ManageException;
     public List<Map<String, Object>> selectAll() throws ManageException;
     public void delete( Usuarios usuarios) throws  ManageException;
 }

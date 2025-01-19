@@ -37,7 +37,7 @@ public class ManagerTutorImplement implements  ManagerTutor {
         }
     }
 
-    public Tutor selectByid(Tutor tutor) throws ManageException {
+    public Tutor selectById(Tutor tutor) throws ManageException {
         Tutor tutorDato= null;
 
         try{

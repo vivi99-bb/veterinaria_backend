@@ -40,7 +40,7 @@ public class ManagerUsuariosImplement implements ManagerUsuarios {
     }
 
 
-    public Usuarios selectByid(Usuarios usuarios) throws ManageException {
+    public Usuarios selectById(Usuarios usuarios) throws ManageException {
         Usuarios userDato = null;
 
         try{

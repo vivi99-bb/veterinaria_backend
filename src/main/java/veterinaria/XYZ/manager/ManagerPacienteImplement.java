@@ -38,7 +38,7 @@ public class ManagerPacienteImplement  implements  ManagerPaciente{
     }
 
 
-    public Paciente selectByid(Paciente paciente) throws ManageException {
+    public Paciente selectById(Paciente paciente) throws ManageException {
         Paciente pacienteDato = null;
         try{
             pacienteDato =pacienteDao.selectById(paciente);

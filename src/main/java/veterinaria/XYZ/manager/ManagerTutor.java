@@ -9,7 +9,7 @@ import java.util.Map;
 public interface ManagerTutor {
 
     public void crear(Tutor tutor) throws ManageException;
-    public Tutor selectByid(Tutor tutor) throws  ManageException;
+    public Tutor selectById(Tutor tutor) throws  ManageException;
     public List<Map<String, Object>> selectAll() throws ManageException;
     public void delete( Tutor tutor) throws  ManageException;
 
