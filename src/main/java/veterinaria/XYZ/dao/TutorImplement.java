@@ -23,12 +23,9 @@ public class TutorImplement  implements  TutorDao{
 
 
     public void insert(Tutor tutor) throws DaoException {
-        String INSERT = "INSERT INTO tutor (id, ds_nombre, ds_tipo_identif, nu_identificacion, ds_ciudad, ds_direccion, nu_telefono)VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String INSERT = "INSERT INTO public.tutor ( ds_nombre, ds_tipo_identif, nu_identificacion, ds_ciudad, ds_direccion, nu_telefono)VALUES ( ?, ?, ?, ?, ?, ?)";
         try{
-            String uuid = UUID.randomUUID().toString();
-            tutor.setId(uuid);
-
-            jdbcTemplate.update(INSERT, tutor.getId(), tutor.getNombre(), tutor.getTipoIdentidad(), tutor.getNroIdentificacion(), tutor.getCiudad(), tutor.getDireccion(), tutor.getTelefono());
+            jdbcTemplate.update(INSERT,  tutor.getNombre(), tutor.getTipoIdentidad(), tutor.getNroIdentificacion(), tutor.getCiudad(), tutor.getDireccion(), tutor.getTelefono());
         }catch (Exception ex){
             throw new DaoException(ex);
         }
@@ -38,7 +35,8 @@ public class TutorImplement  implements  TutorDao{
     public void update(Tutor tutor) throws DaoException {
         String update ="UPDATE tutor SET  ds_nombre=?, ds_tipo_identif=?, nu_identificacion=?, ds_ciudad=?, ds_direccion=?, nu_telefono=? WHERE id=?";
         try{
-            jdbcTemplate.update(update, tutor.getNombre(), tutor.getTipoIdentidad(), tutor.getNroIdentificacion(), tutor.getCiudad(), tutor.getDireccion(), tutor.getTelefono(), tutor.getId());
+            UUID uuid = UUID.fromString(tutor.getId());
+            jdbcTemplate.update(update, tutor.getNombre(), tutor.getTipoIdentidad(), tutor.getNroIdentificacion(), tutor.getCiudad(), tutor.getDireccion(), tutor.getTelefono(), uuid);
         }catch (Exception ex){
             throw new DaoException(ex);
         }
@@ -49,7 +47,8 @@ public class TutorImplement  implements  TutorDao{
     public void delete(Tutor tutor) throws DaoException {
         String DELETE ="DELETE FROM tutor WHERE id=?";
         try{
-            jdbcTemplate.update(DELETE,tutor.getId());
+            UUID uuid = UUID.fromString(tutor.getId());
+            jdbcTemplate.update(DELETE,uuid);
         }catch (Exception ex){
             throw new DaoException(ex);
         }
@@ -58,8 +57,8 @@ public class TutorImplement  implements  TutorDao{
     public Tutor selectById( Tutor tutor){
         try{
             String QUERY = "SELECT  ds_nombre, ds_tipo_identif, nu_identificacion, ds_ciudad, ds_direccion, nu_telefono FROM tutor WHERE id=?";
-
-            return jdbcTemplate.queryForObject(QUERY, new TutorMapper(), tutor.getId());
+            UUID uuid = UUID.fromString(tutor.getId());
+            return jdbcTemplate.queryForObject(QUERY, new TutorMapper(), uuid);
         } catch(EmptyResultDataAccessException ex){
             return null;
         }

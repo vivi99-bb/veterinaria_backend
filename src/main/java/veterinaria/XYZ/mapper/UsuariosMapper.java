@@ -8,13 +8,14 @@ import java.sql.SQLException;
 
 public class UsuariosMapper implements RowMapper<Usuarios> {
 
-    @Override
+
     public Usuarios mapRow(ResultSet resultSet, int i) throws SQLException{
         Usuarios usuarios = new Usuarios();
+
         usuarios.setCorreo(resultSet.getString("ds_correo"));
-        usuarios.setContraseña(resultSet.getString("ds_contraseña"));
+        usuarios.setContrasena(resultSet.getString("ds_contrasena"));
         usuarios.setNombre(resultSet.getString("ds_nombres"));
-        usuarios.setCedula(resultSet.getInt("nu_cedula"));
+        usuarios.setCedula(resultSet.getLong("nu_cedula"));
 
         return usuarios;
 

@@ -3,7 +3,7 @@ package veterinaria.XYZ.dto;
 public class Usuarios {
 
     private String id,correo, contrasena, nombre;
-    private int cedula;
+    private long cedula;
 
     public Usuarios() {
         this.contrasena = "";
@@ -21,7 +21,7 @@ public class Usuarios {
         this.correo = correo;
     }
 
-    public void setContraseña(String contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
@@ -29,7 +29,7 @@ public class Usuarios {
         this.nombre = nombre;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(long cedula) {
         this.cedula = cedula;
     }
 
@@ -50,7 +50,7 @@ public class Usuarios {
         return nombre;
     }
 
-    public int getCedula() {
+    public long getCedula() {
         return cedula;
     }
 }

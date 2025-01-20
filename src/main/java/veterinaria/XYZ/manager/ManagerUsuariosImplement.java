@@ -8,6 +8,7 @@ import veterinaria.XYZ.exception.ManageException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class ManagerUsuariosImplement implements ManagerUsuarios {
@@ -19,22 +20,24 @@ public class ManagerUsuariosImplement implements ManagerUsuarios {
         this.usuariosDao = usuariosDao;
     }
 
-    public void crear(Usuarios usuarios)  throws ManageException {
+    public void crear(Usuarios usuarios) throws ManageException {
+
+        if (usuarios.getId() == null || usuarios.getId().isEmpty()) {
+            usuarios.setId(UUID.randomUUID().toString());
+        }
+
 
         Usuarios userDato = null;
-
         try {
             userDato = usuariosDao.selectById(usuarios);
-            if(userDato==null){
+            if (userDato == null) {
                 usuariosDao.insert(usuarios);
-            }else{
+            } else {
                 usuariosDao.update(usuarios);
-
             }
-        }catch (DaoException ex){
+        } catch (DaoException ex) {
             throw new ManageException(ex.getMessage());
-
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new ManageException(ex.getMessage());
         }
     }

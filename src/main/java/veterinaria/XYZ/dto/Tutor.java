@@ -3,7 +3,8 @@ package veterinaria.XYZ.dto;
 public class Tutor {
 
     private String id, nombre, tipoIdentidad, ciudad, direccion;
-    private int nroIdentificacion, telefono;
+    private long  telefono;
+    private long nroIdentificacion;
 
     public Tutor() {
         this.id = "";
@@ -35,11 +36,11 @@ public class Tutor {
         this.direccion = direccion;
     }
 
-    public void setNroIdentificacion(int nroIdentificacion) {
+    public void setNroIdentificacion(long nroIdentificacion) {
         this.nroIdentificacion = nroIdentificacion;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
@@ -66,11 +67,11 @@ public class Tutor {
         return direccion;
     }
 
-    public int getNroIdentificacion() {
+    public long getNroIdentificacion() {
         return nroIdentificacion;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 }

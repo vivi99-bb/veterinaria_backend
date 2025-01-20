@@ -8,6 +8,7 @@ import veterinaria.XYZ.exception.ManageException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class ManagerTutorImplement implements  ManagerTutor {
@@ -19,8 +20,11 @@ public class ManagerTutorImplement implements  ManagerTutor {
     }
 
     public void crear(Tutor tutor) throws ManageException{
-        Tutor tutorDato= null;
+        if (tutor.getId() == null || tutor.getId().isEmpty()) {
+            tutor.setId(UUID.randomUUID().toString());
+        }
 
+        Tutor tutorDato= null;
         try {
             tutorDato = tutorDao.selectById(tutor);
             if(tutorDato==null){

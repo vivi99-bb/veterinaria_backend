@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 public class PacienteMapper implements RowMapper<Paciente> {
 
-    @Override
     public Paciente  mapRow(ResultSet resultSet, int i) throws SQLException {
 
         Paciente paciente = new Paciente();
