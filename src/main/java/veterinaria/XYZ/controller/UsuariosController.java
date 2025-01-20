@@ -23,7 +23,7 @@ public class UsuariosController {
         this.businessUsuario = businessUsuario;
     }
 
-    @PostMapping({"/guardar"})
+    @PostMapping({"/guardar-actualizar"})
     public ResponseEntity<ResponseMessage<Usuarios>> saveOrUpdate(@Valid @RequestBody Usuarios request) {
         log.debug("REST request to saveOrUpdate Usuario: {}", request);
         ResponseMessage<Usuarios> message;

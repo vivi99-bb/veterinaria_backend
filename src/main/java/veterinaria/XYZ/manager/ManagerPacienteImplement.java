@@ -8,6 +8,7 @@ import veterinaria.XYZ.exception.ManageException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class ManagerPacienteImplement  implements  ManagerPaciente{
@@ -19,6 +20,9 @@ public class ManagerPacienteImplement  implements  ManagerPaciente{
     }
 
     public void crear(Paciente paciente) throws ManageException {
+        if (paciente.getId() == null || paciente.getId().isEmpty()) {
+            paciente.setId(UUID.randomUUID().toString());
+        }
         Paciente pacienteDato = null;
 
         try {

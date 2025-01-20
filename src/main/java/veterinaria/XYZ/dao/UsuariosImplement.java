@@ -37,7 +37,7 @@ public class UsuariosImplement implements UsuariosDao {
         String update = "UPDATE usuarios SET ds_correo=?, ds_contrasena=?, ds_nombres=?, nu_cedula=? WHERE id=?";
         try{
             UUID uuid = UUID.fromString(usuarios.getId());
-            jdbcTemplate.update(update, usuarios.getCorreo(), usuarios.getContrasena(), usuarios.getNombre(),usuarios.getCedula(),uuid);
+            jdbcTemplate.update(update, usuarios.getCorreo(), usuarios.getContrasena(), usuarios.getNombre(),usuarios.getCedula(),usuarios.getId());
         }catch (Exception ex){
             throw new DaoException(ex);
         }

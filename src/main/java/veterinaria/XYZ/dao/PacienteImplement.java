@@ -9,6 +9,9 @@ import veterinaria.XYZ.exception.DaoException;
 import veterinaria.XYZ.mapper.PacienteMapper;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -22,33 +25,30 @@ public class PacienteImplement implements PacienteDao {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void insert(Paciente paciente)throws DaoException {
-        String INSERT ="INSERT INTO pacientes(" +
-                "id, " +
+    public void insert(Paciente paciente) throws DaoException {
+        String INSERT = "INSERT INTO pacientes(" +
                 "ds_nombre, " +
                 "ds_especie, " +
                 "ds_raza, " +
                 "fe_nacimiento, " +
                 "fe_registro, " +
                 "id_tutor, " +
-                "id_usuario)\n" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                "id_usuario) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
+        // Obtén la fecha actual para fe_registro
+        Date fechaRegistro = new Date();
 
-        try{
-            String uuid = UUID.randomUUID().toString();
-            paciente.setId(uuid);
-
+        try {
             jdbcTemplate.update(INSERT,
-                    paciente.getId(),
                     paciente.getNombre(),
                     paciente.getEspecie(),
                     paciente.getRaza(),
-                    paciente.getFe_nacimiento(),
-                    paciente.getFe_registro(),
+                    new java.sql.Date(paciente.getFe_nacimiento().getTime()), // Convierte a java.sql.Date
+                    new java.sql.Date(fechaRegistro.getTime()),              // Convierte a java.sql.Date
                     paciente.getId_tutor().getId(),
                     paciente.getId_usuario().getId());
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw new DaoException(ex);
         }
     }
@@ -56,7 +56,10 @@ public class PacienteImplement implements PacienteDao {
     public void update(Paciente paciente ) throws DaoException{
         String update ="UPDATE pacientes SET  ds_nombre=?, ds_especie=?, ds_raza=?, fe_nacimiento=?, fe_registro=?, id_tutor=?, id_usuario=? WHERE id=?";
         try{
-            jdbcTemplate.update(update, paciente.getNombre(), paciente.getEspecie(), paciente.getRaza(),paciente.getFe_nacimiento(), paciente.getFe_registro(), paciente.getId_tutor().getId(), paciente.getId_usuario().getId(), paciente.getId() );
+            UUID uuid = UUID.fromString(paciente.getId());
+            UUID tutor = UUID.fromString(paciente.getId_tutor().getId());
+            UUID user = UUID.fromString(paciente.getId_usuario().getId());
+            jdbcTemplate.update(update, paciente.getNombre(), paciente.getEspecie(), paciente.getRaza(),paciente.getFe_nacimiento(), paciente.getFe_registro(), tutor, user, uuid );
         }catch (Exception ex){
             throw new DaoException(ex);
         }
@@ -66,7 +69,8 @@ public class PacienteImplement implements PacienteDao {
 
         String DELETE = "DELETE FROM pacientes WHERE id=? ";
         try{
-            jdbcTemplate.update(DELETE,paciente.getId());
+            UUID uuid = UUID.fromString(paciente.getId());
+            jdbcTemplate.update(DELETE,uuid);
         }catch (Exception ex){
             throw new DaoException(ex);
         }
@@ -91,7 +95,8 @@ public class PacienteImplement implements PacienteDao {
                     "    usuarios D ON A.id_usuario = D.id\n" +
                     "WHERE \n" +
                     "    A.id = ?;";
-            return jdbcTemplate.queryForObject(QUERY, new PacienteMapper(),paciente.getId());
+            UUID uuid = UUID.fromString(paciente.getId());
+            return jdbcTemplate.queryForObject(QUERY, new PacienteMapper(),uuid);
 
         }catch (EmptyResultDataAccessException ex){
             return null;

@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import veterinaria.XYZ.business.BusinessTutor;
-import veterinaria.XYZ.dto.Tutor;
+import veterinaria.XYZ.business.BusinessPaciente;
+import veterinaria.XYZ.dto.Paciente;
 import veterinaria.XYZ.dto.Usuarios;
 import veterinaria.XYZ.mensaje.ResponseMessage;
 
@@ -15,22 +15,23 @@ import java.util.Map;
 
 @RestController
 @Slf4j
-@RequestMapping("/tutor/")
-public class TutorController {
+@RequestMapping("/pacientes/")
+public class PacientesController {
 
-    private BusinessTutor businessTutor;
+    private BusinessPaciente businessPaciente;
 
-    public TutorController(BusinessTutor businessTutor) {
-        this.businessTutor = businessTutor;
+    public PacientesController(BusinessPaciente businessPaciente) {
+        this.businessPaciente = businessPaciente;
     }
 
     @PostMapping({"/guardar-actualizar"})
-    public ResponseEntity<ResponseMessage<Tutor>> saveOrUpdate(@Valid @RequestBody Tutor request) {
+    public ResponseEntity<ResponseMessage<Paciente>> saveOrUpdate(@Valid @RequestBody Paciente request) {
         log.debug("REST request to saveOrUpdate Usuario: {}", request);
-        ResponseMessage<Tutor> message;
+        ResponseMessage<Paciente> message;
         try {
-            this.businessTutor.registrar(request);
-            message = new ResponseMessage<>(HttpStatus.OK.value(),"Operación exitosa", request);
+            this.businessPaciente.registrar(request);
+            message = new ResponseMessage<>(HttpStatus.OK.value(),
+                    "Operación exitosa", request);
         } catch (Exception ex) {
             log.error("Error en saveOrUpdate Usuario: {}", ex.getMessage());
             message = new ResponseMessage<>(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), request);
@@ -38,14 +39,13 @@ public class TutorController {
         return ResponseEntity.status(message.getCode() == 200 ? HttpStatus.OK : HttpStatus.BAD_REQUEST).body(message);
     }
 
-
     @PostMapping({"/selectById"})
-    public ResponseEntity<ResponseMessage<Tutor>> selectById(@RequestBody Tutor request) {
+    public ResponseEntity<ResponseMessage<Paciente>> selectById(@RequestBody Paciente request) {
         log.debug("REST request to saveOrUpdate User : {}", request);
         ResponseMessage message = null;
         try {
-            Tutor tutorfound= this.businessTutor.selectById(request);
-            message = new ResponseMessage<>(200, "selectById, process successful ", tutorfound);
+            Paciente     userfound= this.businessPaciente.selectById(request);
+            message = new ResponseMessage<>(200, "selectById, process successful ", userfound);
         } catch (Exception ex) {
             message = new ResponseMessage<>(406, ex.getMessage(), null);
         }
@@ -57,7 +57,7 @@ public class TutorController {
         List<Map<String, Object>> list =null;
         ResponseMessage message = null;
         try {
-            list = this.businessTutor.selectAll();
+            list = this.businessPaciente.selectAll();
             message = new ResponseMessage<>(200, "selectAll, process successful ", list);
 
         }catch (Exception ex){
@@ -67,11 +67,11 @@ public class TutorController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<ResponseMessage<Tutor>> deleteById(@RequestBody Tutor request) {
+    public ResponseEntity<ResponseMessage<Paciente>> deleteById(@RequestBody Paciente request) {
         log.debug("REST request to deleteById User : {}", request);
         ResponseMessage message = null;
         try {
-            this.businessTutor.delete(request);
+            this.businessPaciente.delete(request);
             message = new ResponseMessage<>(200, "selectAll, process successful ", request);
 
         }catch (Exception ex){
